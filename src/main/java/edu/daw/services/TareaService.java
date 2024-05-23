@@ -38,4 +38,22 @@ public class TareaService {
         }
         return result;
     }
+
+    public Optional<List<Tarea>> getTareaPendiente(){
+        return this.tareaRepository.findByStatus(Estado.PENDIENTE);
+    }
+    public Optional<List<Tarea>> getTareaEnProgreso(){
+        return this.tareaRepository.findByStatus(Estado.EN_PROGRESO);
+    }
+    public Optional<List<Tarea>> getTareaCompletada(){
+        return this.tareaRepository.findByStatus(Estado.COMPLETADA);
+    }
+
+    public Optional<List<Tarea>> getTareaVencida(){
+        return this.tareaRepository.findByVencidas(LocalDate.now());
+    }
+
+    public Optional<List<Tarea>> getTareaNoVencida(){
+        return this.tareaRepository.findByNoVencidas(LocalDate.now());
+    }
 }

@@ -17,7 +17,7 @@ public class TareaController {
     @Autowired
     private TareaService tareaService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Tarea>> listAll() {
 
         return ResponseEntity.ok(this.tareaService.getTareas());
@@ -30,6 +30,24 @@ public class TareaController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(tarea.get());
+    }
+
+    @GetMapping("/pendientes")
+    public ResponseEntity<Optional<List<Tarea>>> listPendientes() {
+
+        return ResponseEntity.ok(this.tareaService.getTareaPendiente());
+    }
+
+    @GetMapping("/finalizados")
+    public ResponseEntity<Optional<List<Tarea>>> listFinalizados() {
+
+        return ResponseEntity.ok(this.tareaService.getTareaCompletada());
+    }
+
+    @GetMapping("/enProgreso")
+    public ResponseEntity<Optional<List<Tarea>>> listEnProgreso() {
+
+        return ResponseEntity.ok(this.tareaService.getTareaEnProgreso());
     }
 
     @PostMapping
@@ -46,12 +64,21 @@ public class TareaController {
         }
         return ResponseEntity.badRequest().build();
     }
-
+    @DeleteMapping
     public ResponseEntity<Tarea> delete(int idTarea){
         if (this.tareaService.borrarTarea(idTarea)){
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @GetMapping("/caducadas")
+    public ResponseEntity<Optional<List<Tarea>>> listCaducada(){
+        return ResponseEntity.ok(this.tareaService.getTareaVencida());
+    }
+
+    @GetMapping("/noCaducadas")
+    public ResponseEntity<Optional<List<Tarea>>> listNoCaducada(){
+        return ResponseEntity.ok(this.tareaService.getTareaNoVencida());
     }
 
 }

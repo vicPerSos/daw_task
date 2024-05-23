@@ -13,10 +13,8 @@ public class Tarea {
     private int id;
     private String titulo;
     private String descripcion;
-
     @Column(name="fecha_creacion")
     private LocalDate fechaCreacion;
-
     @Column(name = "fecha_vencimiento")
     private LocalDate fechaVencimiento;
     @Enumerated(EnumType.STRING)
