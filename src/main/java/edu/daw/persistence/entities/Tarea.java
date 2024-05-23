@@ -14,7 +14,7 @@ public class Tarea {
     private String titulo;
     private String descripcion;
 
-    @Column(name="fecha_creación")
+    @Column(name="fecha_creacion")
     private LocalDate fechaCreacion;
 
     @Column(name = "fecha_vencimiento")
