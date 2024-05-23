@@ -13,9 +13,9 @@ import java.util.Optional;
 public interface TareaCrudRepository extends CrudRepository<Tarea,Integer> {
     Optional<List<Tarea>> findByEstado(Estado estado);
 
-    @Query("select t from Tarea t where t.fecha_vencimiento > :fechaExp")
+    @Query("select t from Tarea t where t.fechaVencimiento > :fechaExp")
     Optional<List<Tarea>> findByExpirables(@Param("fechaExp") LocalDate fechaExp);
 
-    @Query("select t from Tarea t where t.fecha_vencimiento < :fechaExp")
+    @Query("select t from Tarea t where t.fechaVencimiento < :fechaExp")
     Optional<List<Tarea>> findByNoExpirables(@Param("fechaExp") LocalDate fechaExp);
 }
