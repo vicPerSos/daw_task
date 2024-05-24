@@ -42,8 +42,8 @@ public class TareaService {
     public Optional<List<Tarea>> getTareaPendiente(){
         return this.tareaRepository.findByStatus(Estado.PENDIENTE);
     }
-    public Optional<List<Tarea>> getTareaEnProgreso(){
-        return this.tareaRepository.findByStatus(Estado.EN_PROGRESO);
+    public Optional<List<Tarea>> getTareaEnProceso(){
+        return this.tareaRepository.findByStatus(Estado.EN_PROCESO);
     }
     public Optional<List<Tarea>> getTareaCompletada(){
         return this.tareaRepository.findByStatus(Estado.COMPLETADA);

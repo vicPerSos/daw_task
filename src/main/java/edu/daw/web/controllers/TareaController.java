@@ -44,10 +44,10 @@ public class TareaController {
         return ResponseEntity.ok(this.tareaService.getTareaCompletada());
     }
 
-    @GetMapping("/enProgreso")
-    public ResponseEntity<Optional<List<Tarea>>> listEnProgreso() {
+    @GetMapping("/enProceso")
+    public ResponseEntity<Optional<List<Tarea>>> listEnProceso() {
 
-        return ResponseEntity.ok(this.tareaService.getTareaEnProgreso());
+        return ResponseEntity.ok(this.tareaService.getTareaEnProceso());
     }
 
     @PostMapping
