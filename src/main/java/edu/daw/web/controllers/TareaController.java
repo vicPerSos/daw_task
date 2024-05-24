@@ -22,6 +22,7 @@ public class TareaController {
 
         return ResponseEntity.ok(this.tareaService.getTareas());
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/{idTarea}")
     public ResponseEntity<Tarea> findOne(@PathVariable int idTarea) {
@@ -31,29 +32,57 @@ public class TareaController {
         }
         return ResponseEntity.ok(tarea.get());
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/pendientes")
     public ResponseEntity<Optional<List<Tarea>>> listPendientes() {
 
         return ResponseEntity.ok(this.tareaService.getTareaPendiente());
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/finalizados")
     public ResponseEntity<Optional<List<Tarea>>> listFinalizados() {
 
         return ResponseEntity.ok(this.tareaService.getTareaCompletada());
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     @GetMapping("/enProceso")
     public ResponseEntity<Optional<List<Tarea>>> listEnProceso() {
 
         return ResponseEntity.ok(this.tareaService.getTareaEnProceso());
     }
+    //------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/caducadas")
+    public ResponseEntity<Optional<List<Tarea>>> listCaducada() {
+        return ResponseEntity.ok(this.tareaService.getTareaVencida());
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/noCaducadas")
+    public ResponseEntity<Optional<List<Tarea>>> listNoCaducada() {
+        return ResponseEntity.ok(this.tareaService.getTareaNoVencida());
+    }
+    //------------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/nombre/{coincidencia}")
+    public ResponseEntity<List<Tarea>> listNombre(@PathVariable String coincidencia) {
+
+        List<Tarea> tarea = this.tareaService.getTareaByNombre(coincidencia);
+        if (tarea.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tarea);
+    }
+    //------------------------------------------------------------------------------------------------------------------
 
     @PostMapping
     public ResponseEntity<Tarea> create(@RequestBody Tarea tarea) {
         return new ResponseEntity<Tarea>(this.tareaService.crearTarea(tarea), HttpStatus.CREATED);
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     @PutMapping
     public ResponseEntity<Tarea> update(int idTarea, @RequestBody Tarea tarea) {
@@ -64,21 +93,15 @@ public class TareaController {
         }
         return ResponseEntity.badRequest().build();
     }
+    //------------------------------------------------------------------------------------------------------------------
+
     @DeleteMapping
-    public ResponseEntity<Tarea> delete(int idTarea){
-        if (this.tareaService.borrarTarea(idTarea)){
+    public ResponseEntity<Tarea> delete(int idTarea) {
+        if (this.tareaService.borrarTarea(idTarea)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
     }
-    @GetMapping("/caducadas")
-    public ResponseEntity<Optional<List<Tarea>>> listCaducada(){
-        return ResponseEntity.ok(this.tareaService.getTareaVencida());
-    }
-
-    @GetMapping("/noCaducadas")
-    public ResponseEntity<Optional<List<Tarea>>> listNoCaducada(){
-        return ResponseEntity.ok(this.tareaService.getTareaNoVencida());
-    }
+    //------------------------------------------------------------------------------------------------------------------
 
 }

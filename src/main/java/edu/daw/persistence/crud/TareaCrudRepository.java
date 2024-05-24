@@ -10,12 +10,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface TareaCrudRepository extends CrudRepository<Tarea,Integer> {
+public interface TareaCrudRepository extends CrudRepository<Tarea, Integer> {
     Optional<List<Tarea>> findByEstado(Estado estado);
+    //------------------------------------------------------------------------------------------------------------------
 
     @Query("select t from Tarea t where t.fechaVencimiento > :fechaExp")
     Optional<List<Tarea>> findByExpirables(@Param("fechaExp") LocalDate fechaExp);
+    //------------------------------------------------------------------------------------------------------------------
 
     @Query("select t from Tarea t where t.fechaVencimiento < :fechaExp")
     Optional<List<Tarea>> findByNoExpirables(@Param("fechaExp") LocalDate fechaExp);
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Query("select t from Tarea t where t.titulo like %:coincidencia%")
+    List<Tarea> findByTitulo(@Param("coincidencia") String coincidencia);
 }
